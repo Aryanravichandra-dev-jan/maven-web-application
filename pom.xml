@@ -104,7 +104,7 @@
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://65.0.99.60:7569/aryantechnologies/repository/maven-snapshots/</url>
+	      <url>http://65.0.99.60:7569/aryantechnologies/repository/pegasus-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
