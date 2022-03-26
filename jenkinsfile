@@ -1,0 +1,33 @@
+node{
+
+def mavenHome = tool name: "maven3.8.5"
+
+//checkout stage 
+ stage('checkoutcode'){
+ git branch: 'development', credentialsId: 'd759bfd6-69ba-48f8-b31b-71fe81fa31ae',
+ url: 'https://github.com/Aryanravichandra-dev-jan/maven-web-application.git'
+ }
+ 
+ //Build stage
+ stage('Build'){
+ sh "$mavenHome/bin/mvn clean package"
+ }
+
+//Generate sonarqube Report
+stage("sonarqubeReport"){
+sh "$mavenHome/bin/mvn sonar:sonar" 
+}
+
+//upload artifactory into artifactory repo
+stage("UploadArtifactsintoNexus"){
+sh "$mavenHome/bin/mvn deploy"
+}
+
+//deploy app into tomcat server
+stage('DeployAppIntoTomcat'){
+sshagent(['9de94bca-22cb-42f1-9e48-1d4a8954fa03']) {
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@52.66.195.145:/opt/apache-tomcat-9.0.59/webapps"
+}
+}
+ 
+ }//Node closing
