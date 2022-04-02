@@ -1,4 +1,4 @@
-def sendsslackNotifications(String buildStatus = 'STARTED') {
+def sendslackNotifications(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus =  buildStatus ?: 'SUCCESSFUL'
 
@@ -39,6 +39,7 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKe
 try{
 //checkout stage
  stage('checkoutcode'){
+ sendslackNotification('STARTED')
  git branch: 'development', credentialsId: 'd759bfd6-69ba-48f8-b31b-71fe81fa31ae',
  url: 'https://github.com/Aryanravichandra-dev-jan/maven-web-application.git'
  }
@@ -75,7 +76,7 @@ currentBuild.result = "FAILED"
 }
 
 finally{
-sendsslackNotifications(CurrentBuild.result)
+sendslackNotifications(CurrentBuild.result)
 }
 
  }//Node closing
