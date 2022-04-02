@@ -53,9 +53,9 @@ stage('sonarqubeReport'){
 sh "$mavenHome/bin/mvn sonar:sonar" 
 }
 
-/*
+
 //upload artifactory into artifactory repo
-stage('UploadArtifactsintoNexus'){
+/* stage('UploadArtifactsintoNexus'){
 sh "$mavenHome/bin/mvn deploy"
 }
 
