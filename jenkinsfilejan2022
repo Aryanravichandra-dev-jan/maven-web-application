@@ -76,7 +76,7 @@ currentBuild.result = "FAILED"
 }
 
 finally{
-sendslackNotifications(CurrentBuild.result)
+sendslackNotifications('CurrentBuild.result')
 }
 
  }//Node closing
